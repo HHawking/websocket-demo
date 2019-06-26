@@ -72,6 +72,7 @@ public class WebsocketServer {
         Thread thread = new Thread(followThread);
         thread.start();
         followThreadMap.put(userId,followThread);
+        System.out.println("用户"+userId+"订阅成功，当前订阅线程数"+ followThreadMap.size());
     }
 
     /**
