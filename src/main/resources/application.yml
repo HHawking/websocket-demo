@@ -1,2 +1,11 @@
 server:
   port: 9926
+
+spring:
+  application:
+    name: websocket-demo
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: myredis
+    database: 2

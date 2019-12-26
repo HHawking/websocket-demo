@@ -1,20 +1,22 @@
 package com.hhawking.websocket.demo.servicec;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class WebsocketService {
 
-    Map<Integer,String> map = new HashMap<>();
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    public String getMsg(Integer id) {
-        return map.get(id);
+    public void setRedis(Integer id, String msg) {
+        stringRedisTemplate.opsForHash().put("online","user"+id,msg);
     }
 
-    public void setMsg(Integer id,String msg) {
-        map.put(id,msg);
+    public String getRedis(Integer id) {
+        HashOperations<String, String, String> opsForHash = stringRedisTemplate.opsForHash();
+        return opsForHash.get("online","user"+id);
     }
 }
